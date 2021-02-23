@@ -30,7 +30,7 @@ function range(start, stop, step) {
     return result;
 };
 
-range(1000000).forEach((item) => {
+range(10000).forEach((item) => {
     console.log('Processing in ' + item)
     fs.writeFile(`images/image_${item}.png`, text2png(`${item}`, {
         font: '80px Futura',
