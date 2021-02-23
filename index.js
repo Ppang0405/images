@@ -3,8 +3,12 @@ var text2png = require('text2png');
 
 const IMAGE_DIR = 'images'
 
-fs.rmdir(IMAGE_DIR, { recursive: true }, (err) => { console.error('remove folder error: ' + err) });
-fs.mkdir(`./${IMAGE_DIR}`, (err) => { console.error('mkdir folder error: ' + err) });
+try {
+    fs.rmdirSync(IMAGE_DIR, { recursive: true });
+    fs.mkdirSync(`./${IMAGE_DIR}`);
+} catch (e) {
+    console.error(e);
+}
 
 // copy of range python func implementation in js
 function range(start, stop, step) {
@@ -30,17 +34,13 @@ function range(start, stop, step) {
     return result;
 };
 
-range(10000).forEach((item) => {
+range(process.argv[2] || 1000000).forEach((item) => {
     console.log('Processing in ' + item)
-    fs.writeFile(`images/image_${item}.png`, text2png(`${item}`, {
+    fs.writeFileSync(`images/image_${item}.png`, text2png(`${item}`, {
         font: '80px Futura',
         color: 'teal',
         backgroundColor: 'linen',
         lineSpacing: 10,
         padding: 20
-    }), (err) => {
-        console.log(err);
-    });
+    }));
 })
-
-
