@@ -34,7 +34,7 @@ function range(start, stop, step) {
     return result;
 };
 
-range(process.argv[2] || 1000000).forEach((item) => {
+range(process.argv[2] || 10000).forEach((item) => {
     console.log('Processing in ' + item)
     fs.writeFileSync(`images/image_${item}.png`, text2png(`${item}`, {
         font: '80px Futura',
